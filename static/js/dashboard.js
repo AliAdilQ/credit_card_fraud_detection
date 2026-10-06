@@ -1,0 +1,21 @@
+"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+  const source = document.getElementById("chart-data");
+  if (!source || typeof Chart === "undefined" || !document.getElementById("status-chart")) return;
+  const data = JSON.parse(source.textContent);
+  const teal = "#199c86", coral = "#de8b91";
+  Chart.defaults.font.family = 'Inter, "Segoe UI", sans-serif';
+  Chart.defaults.font.size = 9;
+  Chart.defaults.color = "#91a0ae";
+  const axes = { x: { grid: { display: false }, border: { display: false }, ticks: { maxRotation: 0, maxTicksLimit: 7 } }, y: { beginAtZero: true, grid: { color: "#edf1f5" }, border: { display: false }, ticks: { precision: 0, maxTicksLimit: 5 } } };
+  const options = () => ({ responsive: true, maintainAspectRatio: false, animation: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? false : { duration: 500 }, plugins: { legend: { display: false }, tooltip: { backgroundColor: "#18384a", padding: 11, cornerRadius: 7 } }, scales: structuredClone(axes) });
+  new Chart(document.getElementById("status-chart"), { type: "doughnut", data: { labels: ["Legitimate", "Potential fraud"], datasets: [{ data: data.status, backgroundColor: [teal, coral], borderWidth: 4, borderColor: "#fff", hoverOffset: 3, borderRadius: 4 }] }, options: { ...options(), scales: {}, cutout: "79%", plugins: { legend: { display: false } } } });
+  new Chart(document.getElementById("trend-chart"), { type: "line", data: { labels: data.trend.labels, datasets: [{ label: "All transactions", data: data.trend.total, borderColor: teal, backgroundColor: "#199c8610", fill: true, tension: .35, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4 }, { label: "Potential fraud", data: data.trend.fraud, borderColor: coral, backgroundColor: "#de8b9110", tension: .35, borderWidth: 1.7, pointRadius: 0, pointHoverRadius: 4 }] }, options: options() });
+  const bars = (id, labels, values, colors) => new Chart(document.getElementById(id), { type: "bar", data: { labels, datasets: [{ data: values, backgroundColor: colors, borderRadius: 4, maxBarThickness: 26 }] }, options: options() });
+  bars("probability-chart", ["0–20%", "20–40%", "40–60%", "60–80%", "80–100%"], data.probability, ["#49aa95", "#7cbdae", "#dbc495", "#dca680", "#d5868e"]);
+  bars("amount-chart", ["< $50", "$50–150", "$150–500", "$500–1k", "$1k+"], data.amounts, "#6f9bb7");
+  const typeOptions = options();
+  typeOptions.scales.x.stacked = true;
+  typeOptions.scales.y.stacked = true;
+  new Chart(document.getElementById("type-chart"), { type: "bar", data: { labels: data.types.labels, datasets: [{ label: "Legitimate", data: data.types.total.map((value, i) => value - data.types.fraud[i]), backgroundColor: "#79bbaa", borderRadius: 3, maxBarThickness: 24 }, { label: "Potential fraud", data: data.types.fraud, backgroundColor: coral, borderRadius: 3, maxBarThickness: 24 }] }, options: typeOptions });
+});

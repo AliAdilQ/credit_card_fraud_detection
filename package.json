@@ -1,0 +1,7 @@
+{
+  "name": "credit-card-fraud-detection-screenshots",
+  "private": true,
+  "description": "Optional browser verification only; the Django app needs no Node build step.",
+  "scripts": {"screenshots": "node scripts/capture_screenshots.cjs"},
+  "devDependencies": {"playwright": "1.62.1"}
+}

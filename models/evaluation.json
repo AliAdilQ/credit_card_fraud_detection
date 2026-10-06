@@ -1,0 +1,114 @@
+{
+  "model_name": "Gradient Boosting",
+  "model_version": "v1-63c7e585a1-42",
+  "threshold": 0.36,
+  "trained_at": "2026-10-06T05:02:46.290054+00:00",
+  "rows": 4000,
+  "fraud_count": 173,
+  "fraud_rate": 0.04325,
+  "seed": 42,
+  "dataset_sha256": "63c7e585a14388c745523a9ed68040dbd094b3c6dc1e76337c57a04a85aa07d4",
+  "split": {
+    "train": 2400,
+    "validation": 800,
+    "test": 800
+  },
+  "selection_metric": "Validation F1, then recall, then ROC-AUC; validation-only threshold tuning",
+  "candidates": [
+    {
+      "name": "Logistic Regression",
+      "threshold": 0.16,
+      "validation": {
+        "accuracy": 0.96625,
+        "precision": 0.5952380952380952,
+        "recall": 0.7142857142857143,
+        "f1": 0.6493506493506493,
+        "roc_auc": 0.8934827264239029,
+        "average_precision": 0.6891948583257047,
+        "brier_score": 0.022360854207324758,
+        "confusion_matrix": [
+          [
+            748,
+            17
+          ],
+          [
+            10,
+            25
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Random Forest",
+      "threshold": 0.16,
+      "validation": {
+        "accuracy": 0.975,
+        "precision": 0.7142857142857143,
+        "recall": 0.7142857142857143,
+        "f1": 0.7142857142857143,
+        "roc_auc": 0.9385620915032679,
+        "average_precision": 0.6977736745179646,
+        "brier_score": 0.021305375933799713,
+        "confusion_matrix": [
+          [
+            755,
+            10
+          ],
+          [
+            10,
+            25
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Gradient Boosting",
+      "threshold": 0.36,
+      "validation": {
+        "accuracy": 0.9775,
+        "precision": 0.7931034482758621,
+        "recall": 0.6571428571428571,
+        "f1": 0.71875,
+        "roc_auc": 0.9354435107376283,
+        "average_precision": 0.7371476794506597,
+        "brier_score": 0.02015001702247039,
+        "confusion_matrix": [
+          [
+            759,
+            6
+          ],
+          [
+            12,
+            23
+          ]
+        ]
+      }
+    }
+  ],
+  "test": {
+    "accuracy": 0.98125,
+    "precision": 0.8333333333333334,
+    "recall": 0.7142857142857143,
+    "f1": 0.7692307692307693,
+    "roc_auc": 0.8971988795518206,
+    "average_precision": 0.7692766862017949,
+    "brier_score": 0.01633647623838904,
+    "confusion_matrix": [
+      [
+        760,
+        5
+      ],
+      [
+        10,
+        25
+      ]
+    ]
+  },
+  "versions": {
+    "python": "3.12.14",
+    "scikit_learn": "1.7.2",
+    "pandas": "2.3.3",
+    "numpy": "2.3.5",
+    "joblib": "1.5.3"
+  }
+}

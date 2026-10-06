@@ -1,0 +1,10 @@
+<div class="table-responsive"><table class="transaction-table"><thead><tr><th scope="col">Transaction</th><th scope="col">Date / time</th><th scope="col">Amount</th><th scope="col">Type</th><th scope="col">Probability</th><th scope="col">Risk level</th><th scope="col">Prediction</th></tr></thead><tbody>
+{% for transaction in rows %}<tr>
+  <td><a class="transaction-link" href="{% url 'detection:result' transaction.transaction_id %}"><span class="table-card-icon">{% include 'components/icon.html' with name='card' %}</span>{{ transaction.short_id }}</a></td>
+  <td><span class="table-date">{{ transaction.transaction_datetime|date:'M d, Y' }}</span><small>{{ transaction.transaction_datetime|date:'H:i T' }}</small></td>
+  <td class="amount-cell">${{ transaction.amount|floatformat:2 }}</td><td>{{ transaction.transaction_type }}</td>
+  <td><div class="table-probability"><span>{{ transaction.probability_percent|floatformat:1 }}%</span><span class="mini-meter"><span class="risk-{{ transaction.risk_level }}" style="width:{{ transaction.probability_percent|floatformat:0 }}%"></span></span></div></td>
+  <td><span class="risk-badge risk-{{ transaction.risk_level }}"><span class="mini-dot"></span>{{ transaction.get_risk_level_display }}</span></td>
+  <td><span class="prediction-badge {% if transaction.predicted_class %}flagged{% else %}legitimate{% endif %}">{% if transaction.predicted_class %}{% include 'components/icon.html' with name='alert' %} Potential fraud{% else %}{% include 'components/icon.html' with name='check' %} Legitimate{% endif %}</span></td>
+</tr>{% empty %}<tr><td colspan="7"><div class="empty-state">{% include 'components/icon.html' with name='history' %}<h3>No transactions to show</h3><p>Analyze a transaction or adjust your filters to see results here.</p><a href="{% url 'detection:predict' %}" class="btn btn-primary">Analyze transaction</a></div></td></tr>{% endfor %}
+</tbody></table></div>

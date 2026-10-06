@@ -1,0 +1,6 @@
+<div class="kpi-grid">
+  <div class="kpi-card"><div class="kpi-label">Total transactions <span class="icon-box blue">{% include 'components/icon.html' with name='card' %}</span></div><div class="kpi-value">{{ stats.total }}</div><div class="kpi-foot">{% include 'components/icon.html' with name='activity' %} Analyzed transaction metadata</div></div>
+  <div class="kpi-card"><div class="kpi-label">Legitimate <span class="icon-box green">{% include 'components/icon.html' with name='shield' %}</span></div><div class="kpi-value">{{ stats.legitimate }}</div><div class="kpi-foot"><span class="mini-dot green-dot"></span> Below the model decision threshold</div></div>
+  <div class="kpi-card"><div class="kpi-label">Potential fraud <span class="icon-box red">{% include 'components/icon.html' with name='alert' %}</span></div><div class="kpi-value">{{ stats.fraud }}</div><div class="kpi-foot"><span class="mini-dot red-dot"></span> Flagged for a closer look</div></div>
+  <div class="kpi-card"><div class="kpi-label">Flagged rate <span class="icon-box purple">{% include 'components/icon.html' with name='chart' %}</span></div><div class="kpi-value">{{ stats.fraud_percent|floatformat:1 }}<span class="value-unit">%</span></div><div class="kpi-foot">Predictions, not confirmed fraud</div></div>
+</div>

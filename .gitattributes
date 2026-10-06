@@ -1,0 +1,13 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.cjs text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+# Preserve the exact training CSV bytes used by evaluation.json's SHA-256.
+data/*.csv -text
+*.pkl binary
+*.png binary
